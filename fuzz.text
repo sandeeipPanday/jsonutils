@@ -1,0 +1,56 @@
+- API endpoints: Testing input variations for functions handling requests (Flask or FastAPI endpoints).
+- Database queries: Ensuring SQL data integrity under unexpected input (PostgreSQL integration).
+- Authentication workflows: Validating SSO integration robustness (OAuth, JWT, session tokens).
+- Data parsing utilities: Handling CVE data feeds without corruption (JSON processing scripts).
+No problem, Sandeep! I'll break it down clearly.
+How Dynamic Tests Get Created in Fuzz Testing
+Dynamic testing—especially fuzz testing—generates and executes test cases automatically to check how a program behaves under unexpected input conditions.
+Here’s how it works step by step:
+1. Define the Target for Testing
+Before generating tests, we decide what to test.
+For example, in your Python project:
+- A function that processes user input (test_function(data))
+- An API endpoint receiving HTTP requests (Flask API)
+- A security workflow handling authentication (SSO integration)
+2. Generate Randomized or Structured Inputs
+Instead of manually writing test cases, fuzzing automatically creates inputs to uncover potential weaknesses.
+This can include:
+- Random bytes (b'\x00\xFF\xAB\xCD')
+- Malicious patterns (b'"; DROP TABLE users;')
+- Unicode edge cases (b"你好, 😊, こんにちは")
+- Boundary values (b"A" * 1000000)
+A fuzzing tool like Atheris or pythonfuzz keeps feeding different variations into the target function.
+3. Execute Tests Continuously
+The fuzzing tool runs these inputs through your function:
+- If the function raises an error or crashes, the test finds a weak point.
+- If output seems incorrect, it logs unexpected behavior for debugging.
+Example fuzzing execution:
+import atheris
+import sys
+
+def test_function(data):
+    if data == b"crash":
+        raise Exception("Crash detected!")
+
+def fuzz_entry_point():
+    atheris.Setup(sys.argv, test_function)
+    atheris.Fuzz()
+
+if __name__ == "__main__":
+    fuzz_entry_point()
+
+
+Here, Atheris automatically mutates input to find edge cases.
+4. Analyze Results & Improve Code
+After running dynamic tests, we:
+- Review logs of failures
+- Identify patterns that cause crashes
+- Fix vulnerable code sections
+In automated pipelines, test results can be stored and reported dynamically.
+
+Why This is Useful for Your Project
+Since your work involves security workflows, API integration, and automation, fuzz testing helps: ✔ Validate input sanitization
+✔ Prevent vulnerabilities in data parsing
+✔ Detect unexpected system behavior in CI/CD
+Would you like help setting this up for a specific module in your Python project?
+Let me know how deep you want to go! 🚀
