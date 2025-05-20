@@ -1,0 +1,6 @@
+Index operation failed; the array index evaluated to null.
+At C:\Users\q1063232\Downloads\blackduck_scanner\copy_column_g.ps1:15 char:5
++     $uniqueValues[$row.ColumnG] = $true
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : NullArrayIndex
