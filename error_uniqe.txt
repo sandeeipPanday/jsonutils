@@ -1,6 +1,8 @@
-Index operation failed; the array index evaluated to null.
-At C:\Users\q1063232\Downloads\blackduck_scanner\copy_column_g.ps1:15 char:5
-+     $uniqueValues[$row.ColumnG] = $true
-+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
-    + FullyQualifiedErrorId : NullArrayIndex
+Traceback (most recent call last):
+  File "/home/q1063232/docker_data/docker_data_sort/vul_sort.py", line 8, in <module>
+    df["updatetimestamp"] = pd.to_datetime(df["updatetimestamp"], errors="coerce")
+  File "/usr/local/lib/python3.10/dist-packages/pandas/core/frame.py", line 4102, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/usr/local/lib/python3.10/dist-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    raise KeyError(key) from err
+KeyError: 'updatetimestamp'
