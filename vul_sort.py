@@ -4,7 +4,10 @@ import pandas as pd
 file_path = "C:/path/to/your/file.csv"  # Update with the actual path
 df = pd.read_csv(file_path)
 
-# Convert updatetimestamp to datetime safely
+# Convert column names to lowercase for consistency
+df.columns = df.columns.str.lower()
+
+# Convert updateTimestamp to datetime safely
 df["updatetimestamp"] = pd.to_datetime(df["updatetimestamp"], errors="coerce")
 
 # Remove duplicates, keeping the latest timestamp
