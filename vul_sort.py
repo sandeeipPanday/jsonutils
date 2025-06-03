@@ -1,23 +1,28 @@
 import pandas as pd
 
-# Load the CSV file
-file_path = "C:/path/to/your/file.csv"  # Update with the actual path
-df = pd.read_csv(file_path)
+# Load the Excel file
+file_path = "your_excel_file.xlsx"  # Update with your actual file path
+df = pd.read_excel(file_path, dtype=str)  # Read all values as strings to handle formatting issues
 
-# Convert column names to lowercase for consistency
-df.columns = df.columns.str.lower()
+# Ensure required columns exist
+required_columns = ["namespace", "vulnerabilityID", "updateTimestamp"]
+if not all(col in df.columns for col in required_columns):
+    raise ValueError(f"Missing required columns: {', '.join(set(required_columns) - set(df.columns))}")
 
-# Rename updateTimestamp to ensure correct processing
-df = df.rename(columns={"updatetimestamp": "updateTimestamp"})
-
-# Convert updateTimestamp to datetime safely
+# Convert updateTimestamp to datetime, handling errors and missing values
 df["updateTimestamp"] = pd.to_datetime(df["updateTimestamp"], errors="coerce")
 
-# Remove duplicates, keeping the latest timestamp
-df_cleaned = df.sort_values(by="updateTimestamp", ascending=False).drop_duplicates(subset=["namespace", "vulnerabilityid"], keep="first")
+# Drop rows where namespace or vulnerabilityID are missing
+df.dropna(subset=["namespace", "vulnerabilityID"], inplace=True)
 
-# Save the cleaned data to a new CSV file
-output_path = "C:/path/to/cleaned_file.csv"
-df_cleaned.to_csv(output_path, index=False)
+# Sort by updateTimestamp to get the latest entries
+df.sort_values(by=["namespace", "vulnerabilityID", "updateTimestamp"], ascending=[True, True, False], inplace=True)
 
-print("Duplicates removed, latest timestamps kept! Cleaned file saved.")
+# Drop duplicates, keeping only the latest timestamp entry for each namespace-vulnerability pair
+df = df.drop_duplicates(subset=["namespace", "vulnerabilityID"], keep="first")
+
+# Save the cleaned data to a new Excel file
+output_path = "cleaned_excel_file.xlsx"
+df.to_excel(output_path, index=False)
+
+print(f"Processed file saved as: {output_path}")
