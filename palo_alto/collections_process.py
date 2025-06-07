@@ -1,7 +1,7 @@
 import pandas as pd
 
-# Load the CSV file (update the filename accordingly)
-df = pd.read_csv("source_file.csv")
+# Load the CSV file with explicit dtype settings to avoid warnings
+df = pd.read_csv("source_file.csv", dtype={'Collections': str}, low_memory=False)
 
 # Ensure 'Collections' is treated as a string and split on commas
 df['Collections'] = df['Collections'].astype(str).str.split(',')
