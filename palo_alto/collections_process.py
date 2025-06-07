@@ -6,7 +6,10 @@ df = pd.read_csv("source_file.csv", dtype={'Collections': str}, low_memory=False
 # Ensure 'Collections' is treated as a string and split on commas
 df['Collections'] = df['Collections'].astype(str).str.split(',')
 
-# Expand rows based on 'Collections' while keeping other columns the same
+# Remove unwanted values from the Collections column
+df['Collections'] = df['Collections'].apply(lambda x: [item.strip() for item in x if item.strip() not in ["All", "A 2 - abc grp (RBAC)"]])
+
+# Expand rows based on filtered 'Collections' while keeping other columns the same
 df_expanded = df.explode('Collections')
 
 # Save the modified data to a new file
