@@ -3,3 +3,23 @@ Specify dtype option on import or set low_memory=False.
 Namespaces
 
 DtypeWarning: Columns (28) have mixed types. Specify dtype option on import or set low_memory=False
+
+
+Web application, network, and computer security assessments
+Attack surface management experience
+Cloud security assessment experience
+Programming experience (e.g. Python, Node.js, JavaScript)
+Demonstrated ability to analyze, triage, and escalate security vulnerabilities
+Familiarity with various defensive and offensive security tool sets
+Relevant Offensive security certifications such as OSCP and eCPPT.
+Familiarity with mobile security is a plus
+Experience working in a large, global, and complex environment
+Ability to communicate information security related risks, concepts, and situations to a technical and non-technical audience
+Triage on general information security tickets.
+Stay current with emerging security threats, vulnerabilities, and attack techniques. Utilize threat intelligence sources to proactively identify potential risks.
+- Analysing vulnerabilities,
+- Providing necessary information and guidance to IT Technology Owners,
+- Monitoring remediation actions.
+understanding of various IT technologies (IT infrastructure and application level),
+IT general knowledge, principles of software development and understanding of web technologies,
+utilizing CVEs, collecting and processing information from vulnerability databases,
